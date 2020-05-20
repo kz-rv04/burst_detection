@@ -4,7 +4,7 @@
 import pandas as pd
 import numpy as np
 import sympy.functions.combinatorial.factorials as c
-
+import scipy.stats.binom.pmf
 
 #define the transition cost tau: cost of switching states
 #there's a cost to move up states, no cost to move down
@@ -26,8 +26,8 @@ def tau(i1,i2,gamma,n):
 #    r: number of target events in each time period (1xn)
 #    p: expected proportions of each state (1xk)
 def fit(d,r,p):
-    return -np.log(np.float(c.binomial(d,r)) * (p**r) * (1-p)**(d-r))
-
+    # return -np.log(np.float(c.binomial(d,r)) * (p**r) * (1-p)**(d-r))
+    return -np.log(np.float(pmf(k=r, n=d, p=p)))
 
 #define the burst detection function for a two-state automaton
 #inputs:
